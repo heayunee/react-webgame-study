@@ -42,10 +42,13 @@
 
         render() {
             return (
+                //<></> 로 사용가능하나, 바벨 미설치 오류로 임시 React.Fragment로 적용
+                //render에 있는 함수는 render 될 때마다 그려주기 때문에, 외부 함수로 빼는 것이 좋음.
                 <React.Fragment>
                     <div>{this.state.first} 곱하기 {this.state.second}는?</div>
                     <form action="#" onSubmit={this.onSubmit}>
-                        <input type="number" value={this.state.value} onChange={this.onChange}/>
+                        <input ref={(c) => this.hello = c} type="number" value={this.state.value}
+                               onChange={this.onChange}/>
                         <button type="submit">입력!</button>
                     </form>
                     <div>{this.state.result}</div>
