@@ -1,6 +1,6 @@
 <html lang="ko">
 <head>
-    <meta charset="utf-8">
+    <meta charSet="utf-8">
     <title>웹게임</title>
 </head>
 <body>
@@ -9,7 +9,8 @@
 <script crossOrigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <!--<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>-->
 <!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
-<script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
     'use strict';
 
     //JS class : 1% error Boundary에서 쓰임. (요즘엔 잘 안씀)
@@ -23,12 +24,22 @@
             if (this.state.liked) {
                 return 'You liked This.';
             }
-            return React.createElement('button', {onClick: () => this.setState({liked: true})}, 'Like');
+            //return React.createElement('button', {onClick: () => this.setState({liked: true})}, 'Like');
+            /* JSX 문법
+             * html - 소문자로 작성
+             * return 다음엔 div던, html 태그 1개만 올 수 있고, <></>로도 쓸 수 있음.
+            */
+            return (
+                <button onClick={() => this.setState({liked: true})}>
+                    Like
+                </button>
+            );
         }
     }
 </script>
-<script>
-    ReactDOM.render(React.createElement(LikeButton), document.querySelector('#root'));
+<script type="text/babel">
+    //ReactDOM.render(<LikeButton/>, document.querySelector('#root'));    //React 17버전 코드
+    ReactDOM.createRoot(document.querySelector('#root')).render(<LikeButton/>)  //React 18버전 코드
 </script>
 </body>
 </html>
