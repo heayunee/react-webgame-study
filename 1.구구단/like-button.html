@@ -1,0 +1,34 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>웹게임</title>
+</head>
+<body>
+<div id="root"></div>
+<script crossOrigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossOrigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<!--<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>-->
+<!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
+<script>
+    'use strict';
+
+    //JS class : 1% error Boundary에서 쓰임. (요즘엔 잘 안씀)
+    class LikeButton extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {liked: false};
+        }
+
+        render() {
+            if (this.state.liked) {
+                return 'You liked This.';
+            }
+            return React.createElement('button', {onClick: () => this.setState({liked: true})}, 'Like');
+        }
+    }
+</script>
+<script>
+    ReactDOM.render(React.createElement(LikeButton), document.querySelector('#root'));
+</script>
+</body>
+</html>
