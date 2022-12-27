@@ -2,63 +2,67 @@
 <head>
     <meta charSet="UTF-8"/>
     <title>구구단</title>
+    <script crossOrigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossOrigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
 <div id="root"></div>
-<script crossOrigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script crossOrigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
 <script type="text/babel">
     'use strict';
 
-    class GuGuDan extends React.Component {
-        state = {
-            first: Math.ceil(Math.random() * 9),
-            second: Math.ceil(Math.random() * 9),
-            value: '',
-            result: '',
-        }
-        //만들어준 함수 : 화살표 함수 사용 필수 (onSubmit, onChange)
-        onSubmit = (e) => {
-            e.preventDefault();
-            if (parseInt(this.state.value) === this.state.first * this.state.second) {
-                this.setState({
-                    result: '정답',
-                    first: Math.ceil(Math.random() * 9),
-                    secod: Math.ceil(Math.random() * 9),
-                    value: '',
-                });
-            } else {
-                this.setState({
-                    result: '땡',
-                    value: '',
-                });
-            }
-        };
-        onChange = (e) => {
-            this.setState({value: e.target.value});
+    const GuGuDan = () => {
+        /* react Hook
+        * [useState]
+          const [state, setState] = React.useState('초기화');
+          출력: setState('출력');
+
+        * [useRef]
+           const inputRef = React.useRef(null);
+           출력 : inputRef.current.focus(); //DOM에 접근시 current 추가 필요
+           마크업 : <input ref={this.onRefInput]
+        * */
+
+        const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+        const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+        const [value, setValue] = React.useState('');
+        const [result, setResult] = React.useState('');
+        const inputRef = React.useRef(null);
+
+        const onChangeInput = (e) => {
+            setValue(e.target.value);
         };
 
-        render() {
-            return (
-                //<></> 로 사용가능하나, 바벨 미설치 오류로 임시 React.Fragment로 적용
-                //render에 있는 함수는 render 될 때마다 그려주기 때문에, 외부 함수로 빼는 것이 좋음.
-                <React.Fragment>
-                    <div>{this.state.first} 곱하기 {this.state.second}는?</div>
-                    <form action="#" onSubmit={this.onSubmit}>
-                        <input ref={(c) => this.hello = c} type="number" value={this.state.value}
-                               onChange={this.onChange}/>
-                        <button type="submit">입력!</button>
-                    </form>
-                    <div>{this.state.result}</div>
-                </React.Fragment>
-            );
-        }
+        const onSubmitForm = (e) => {
+            e.preventDefault();
+            if (parseInt(value) === first * second) {
+                setResult('정답');
+                setFirst(Math.ceil(Math.random() * 9));
+                setSecond(Math.ceil(Math.random() * 9));
+                setValue('');
+                inputRef.current.focus()
+            } else {
+                setResult('땡');
+                setValue('');
+                inputRef.current.focus()
+            }
+        };
+
+        return (
+            <React.Fragment>
+                <div>{first} 곱하기 {second}는?</div>
+                <form action="#" onSubmit={onSubmitForm}>
+                    <input ref={inputRef} type="number" value={value}
+                           onChange={onChangeInput}/>
+                    <button type="submit">입력!</button>
+                </form>
+                <div>{result}</div>
+            </React.Fragment>
+        );
     }
 </script>
 <script type="text/babel">
-    ReactDOM.createRoot(document.querySelector('#root')).render(<GuGuDan/>);
+    ReactDOM.createRoot(document.querySelector('#root')).render(<GuGuDan/>)
 </script>
 </body>
 </html>
