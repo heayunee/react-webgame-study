@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Try from './Try';
 
 /**
  *  getNumbers () : function
@@ -13,6 +14,7 @@ class NumberBaseball extends Component {
         result: '',
         value: '',
         answer: getNumbers(),
+        tries: [],
     };
     onSubmit = () => {
 
@@ -20,6 +22,15 @@ class NumberBaseball extends Component {
     onChangeInput = () => {
 
     }
+    fruits = [
+        { fruit: '사과', taste: '맛있다.' },
+        { fruit: '딸기', taste: '맛있다.' },
+        { fruit: '파인애플', taste: '달다.' },
+        { fruit: '레몬', taste: '시다.' },
+        { fruit: '배', taste: '시원하다.' },
+        { fruit: '감', taste: '떫다.' },
+        { fruit: '사과', taste: '맛없다.' }
+    ]
     render() {
         return (
             <>
@@ -29,17 +40,9 @@ class NumberBaseball extends Component {
                 </form>
                 <div>시도: {this.state.tries.length}</div>
                 <ul>
-                    {[
-                        { fruit: '사과', taste: '맛있다.' },
-                        { fruit: '딸기', taste: '맛있다.' },
-                        { fruit: '파인애플', taste: '달다.' },
-                        { fruit: '레몬', taste: '시다.' },
-                        { fruit: '배', taste: '시원하다.' },
-                        { fruit: '감', taste: '떫다.' },
-                        { fruit: '사과', taste: '맛없다.' }
-                    ].map((v, i) => {
+                    {this.fruits.map((v,i) => {
                         return (
-                            <li key={v.fruit + v.taste}>{v.fruit} : {i}</li>
+                            <Try key={v.fruit + v.taste} value={v} index={i} />
                         )
                     })}
                 </ul>
@@ -47,5 +50,4 @@ class NumberBaseball extends Component {
         );
     }
 }
-
-export default NumberBaseball;
+export default NumberBaseball;  //import NumberBaseball;
