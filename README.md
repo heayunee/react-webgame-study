@@ -40,3 +40,23 @@ zerocho님 강의 `react-webgame` 클론 코딩 레포지토리입니다.
 
 #### [useRef]
 - DOM에 접근할 때 useRef hook을 사용함.
+
+## 03. 숫자야구
+### require 와 import 차이
+  - require : es2015 문법
+  - import : es6 문법
+### 리액트 반복문
+  - map(value, index) 함수 사용
+  - `key` 를 필수로 작성해야하는데, 고유 값이지만 index로 넣는 것은 안티패턴임. 
+### 주석과 메서드 바인딩
+  - 주석 : `{/* JSX 주석 */}`
+  - array.push 사용 x -> 구조분해할당 방식으로 적용필요
+#### [shouldComponentUpdate(nextProps, nextState)]
+  - props 또는 state 를 변경했을 때, 리렌더링을 시작할지 여부를 지정, true 또는 false 를 반환해야 한다.
+  - 리액트 성능 향상을 위한 메서드로, 렌더링이 발생하기 직전에 호출되며, 컴포넌트가 리렌더링을 해야할지 말지를 결정함.
+  - true일 경우 > 다음 라이프사이클 메서드를 계속 실행 / false일 경우 > 리렌더링을 하지 않음.
+#### [MEMO]
+- 자식 컴포넌트 : state, props, 부모 컴포넌트가 리렌더링 됐을 때
+- 부모 컴포넌트가 리렌더링 됐을 때, 자식 컴포넌트가 리렌더링 되는걸 막아줌.
+  - 컴포넌트 관련 참고 : https://ko.reactjs.org/docs/react-component.html#shouldcomponentupdate
+  - 라이프 사이클 참고 : https://velog.io/@youngminss/React-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0-%EB%A9%94%EC%84%9C%EB%93%9C
