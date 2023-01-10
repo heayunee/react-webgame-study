@@ -34,6 +34,7 @@ const ResponseCheck = () => {
     const onReset = useCallback(() => {
         setResult([]);
     },[]);
+    /*
     const renderAverage = () => {
         return result.length === 0
             ? null
@@ -42,6 +43,7 @@ const ResponseCheck = () => {
                 <button type="button" onClick={onReset}>리셋</button>
             </>
     };
+     */
     return (
         <>
             <div
@@ -51,7 +53,19 @@ const ResponseCheck = () => {
             >
                 {message}
             </div>
-            {renderAverage()}
+            {    //즉시실행함수로 if문, for문 사용 가능
+                (() => {
+                    if (result.length === 0) {
+                        return null;
+                    } else {
+                        return <>
+                            <div>평균 시간 : {result.reduce((a, c)=> a + c) / result.length}ms</div>
+                            <button type="button" onClick={onReset}>리셋</button>
+                        </>
+                    }
+                })()
+            }
+            {/* renderAverage() */}
         </>
     )
 }
