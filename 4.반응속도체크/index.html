@@ -1,0 +1,28 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>반응속도체크</title>
+    <style>
+        #screen {
+            width: 300px;
+            height: 200px;
+            text-align: center;
+            user-select: none;
+        }
+        #screen.waiting {
+            background-color: yellow;
+        }
+        #screen.ready {
+            background-color: red;
+            color: white;
+        }
+        #screen.now {
+            background-color: seagreen;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script src="./dist/app.js"></script>
+</body>
+</html>
